@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CMA CGM Tracking Portal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6fa;
+      margin: 0;
+      padding: 0;
+      color: #003366;
+    }
+    @media print {
+      header, .tracking-form, #map, footer {
+        display: none !important;
+      }
+      body {
+        background: white;
+        color: black;
+      }
+      .details {
+        display: block !important;
+      }
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    header img {
+      height: 50px;
+      margin-right: 1rem;
+    }
+    main {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+    .tracking-form {
+      background: #f9fbfd;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #dce3ec;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 1rem 0;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #003366;
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #002244;
+    }
+    .details {
+      margin-top: 2rem;
+      display: none;
+    }
+    .progress {
+      margin-top: 1rem;
+      background: #e0e0e0;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      background: #003366;
+      height: 22px;
+      width: 60%;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      font-size: 13px;
+      line-height: 22px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #003366;
+      color: white;
+      font-size: 1rem;
+    }
+    td {
+      font-size: 0.95rem;
+    }
+    .download-button {
+      margin-top: 1.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #003366;
+      color: white;
+      margin-top: 3rem;
+      font-weight: bold;
+    }
+    #map {
+      width: 100%;
+      height: 450px;
+      margin-top: 2rem;
+      border-radius: 10px;
+    }
+    .map-description {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: #003366;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/CMA_CGM_logo.svg/512px-CMA_CGM_logo.svg.png" alt="CMA CGM Logo" />
+      <h1>CMA CGM</h1>
+    </div>
+    <p>Tracking Portal</p>
+  </header>
+
+  <main>
+    <div class="tracking-form">
+      <label for="track">Enter Tracking Code:</label>
+      <input type="text" id="track" placeholder="e.g., CMA2025VE-8741" />
+      <button id="trackBtn">Track</button>
+    </div>
+
+    <div class="details" id="details">
+      <h2>Shipment Details</h2>
+
+      <h3>Sender & Receiver Information</h3>
+      <table>
+        <tr><th colspan="2">Sender Details</th><th colspan="2">Receiver Details</th></tr>
+        <tr><td>Name</td><td>Min Jun</td><td>Name</td><td>Katerin Zerpa</td></tr>
+        <tr><td>Phone</td><td>+44 7985 293148</td><td>Phone</td><td>+58 412-4151500</td></tr>
+        <tr><td>Email</td><td>mjun2327@gmail.com</td><td>Email</td><td>katerinzerpa65@gmail.com</td></tr>
+        <tr><td>Address</td><td>London, United Kingdom</td><td>Address</td><td>Los Samanes area, San Rafael Street, Valencia, Venezuela</td></tr>
+      </table>
+
+      <h3>Package Information</h3>
+      <table>
+        <tr><th>Weight</th><th>Destination</th><th>Mode</th><th>Delivery Date</th></tr>
+        <tr><td>23 kg</td><td>Venezuela</td><td>Freight</td><td>1 July 2025</td></tr>
+      </table>
+
+      <h3>Delivery Checkpoints</h3>
+      <table>
+        <tr><th>Checkpoint</th><th>Status</th></tr>
+        <tr><td>Simón Bolívar International Airport</td><td>Arrived</td></tr>
+        <tr><td>Los Samanes - Valencia</td><td>Pending</td></tr>
+      </table>
+
+      <div class="progress">
+        <div class="progress-bar">At Customs (60%)</div>
+      </div>
+
+      <div class="download-button">
+        <button onclick="window.print()">Print Page</button>
+      </div>
+
+      <div id="map"></div>
+      <p class="map-description">
+        Route from Simón Bolívar International Airport to Los Samanes, Valencia, Venezuela. Estimated travel time will appear on the map.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p>THANKS FOR USING CMA-CGM</p>
+  </footer>
+
+  <script>
+    function initMap() {
+      const directionsService = new google.maps.DirectionsService();
+      const directionsRenderer = new google.maps.DirectionsRenderer();
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 7,
+        center: { lat: 10.25, lng: -66.87 },
+      });
+      directionsRenderer.setMap(map);
+
+      const request = {
+        origin: "Simón Bolívar International Airport, Venezuela",
+        destination: "San Rafael Street, Valencia, Venezuela",
+        travelMode: google.maps.TravelMode.DRIVING
+      };
+
+      directionsService.route(request, function(result, status) {
+        if (status == "OK") {
+          directionsRenderer.setDirections(result);
+          const duration = result.routes[0].legs[0].duration.text;
+          document.querySelector(".map-description").innerText += ` (Estimated time: ${duration})`;
+        } else {
+          alert("Directions request failed due to " + status);
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("trackBtn").addEventListener("click", function () {
+        const code = document.getElementById("track").value.trim();
+        if (code === "CMA2025VE-8741") {
+          document.getElementById("details").style.display = "block";
+          initMap();
+        } else {
+          alert("Tracking code not found. Please try again.");
+        }
+      });
+    });
+  </script>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_VALID_API_KEY">
+  </script>
+</body>
+</html>
